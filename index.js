@@ -1,25 +1,44 @@
-// ID da planilha do Google Sheets
-const sheetID = '1l5XP_PJ3hIqCEEvYgK0m4aE8Rbks_g0nHmfAI4UtMxw';
+// Função para montar a tabela HTML
+const spinner = document.getElementById('spinner')
+const btns =  document.getElementById('btns')
+function montarTabela(dados) {
+    // Seleciona o elemento onde a tabela será inserida
+    var tabela = document.getElementById('tabela-dados');
 
-// ID da página da planilha
-const sheetPage = 'Página1';
+    // Cria o cabeçalho da tabela
+    var cabecalho = '<tr><th>Nome</th><th>Email</th><th>Telefone</th></tr>';
+
+    // Inicializa o conteúdo da tabela
+    var conteudo = '';
+
+    // Loop através dos dados e adiciona cada linha à tabela
+    dados.forEach(function (item) {
+        conteudo += '<tr>';
+        conteudo += '<td>' + item.Nome + '</td>';
+        conteudo += '<td>' + item.Email + '</td>';
+        conteudo += '<td>' + item.Telefone + '</td>';
+        conteudo += '</tr>';
+    });
+
+    // Define o HTML da tabela
+    tabela.innerHTML = cabecalho + conteudo;
+}
 
 // Função para carregar os dados da planilha
 function loadSheetData() {
-    fetch(`https://spreadsheets.google.com/feeds/list/${sheetID}/${sheetPage}/public/values?alt=json`)
+    fetch('https://script.google.com/macros/s/AKfycbzHDAh7KzDwZbUJVCKI9CDblEB341ZWI9Lkdiu3bfBpo49UCVMDuL1qclkIlpXmnck-XA/exec')
         .then(response => response.json())
         .then(data => {
-            const entries = data.feed.entry;
-            const table = document.getElementById('data-table');
-            table.innerHTML = ''; // Limpa a tabela antes de adicionar os novos dados
-            entries.forEach(entry => {
-                const row = table.insertRow();
-                row.insertCell(0).textContent = entry.gsx$column1.$t;
-                row.insertCell(1).textContent = entry.gsx$column2.$t;
-                // Adicione mais células conforme o número de colunas na sua planilha
-            });
+
+            // Faça algo com os dados recebidos
+            console.log(data);
+
+            spinner.style = 'display:none;'
+            btns.style = 'display:flex !important;'
+            montarTabela(data);
+
         })
-        .catch(error => console.error('Erro ao carregar os dados da planilha:', error));
+        .catch(error => console.error('Erro ao carregar os dados:', error));
 }
 
 // Função para adicionar um item na planilha

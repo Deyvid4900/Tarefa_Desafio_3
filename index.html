@@ -18,16 +18,23 @@
     ></script>
   </head>
   <body>
-    <h1>Tabela de Dados</h1>
-    <table id="data-table">
+    <div
+      class="d-flex aling-itens-center justify-content-center text-bg-success py-3"
+    >
+      <h1 class="">Tabela de Dados</h1>
+    </div>
+    <div class="px-5 py-2">
+      <table id="tabela-dados" class="table table-striped table-bordered">
         <!-- Aqui os dados da planilha serão inseridos dinamicamente -->
+        <div id="spinner" class="spinner-container">
+          <div class="spinner"></div>
+        </div>
       </table>
-      <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci exercitationem mollitia eius, iusto explicabo ex distinctio magnam nostrum error molestiae, dicta, quasi eligendi. Nisi facere porro omnis obcaecati, praesentium rem.
-      </p>
-
-    <button id="add-row">Adicionar Item</button>
-    <button id="delete-row">Excluir Item</button>
+    </div>
+    <div class="d-none aling-itens-center justify-content-end px-5 gap-2" id="btns">
+      <button id="add-row" class="btn btn-primary">Adicionar Item</button>
+      <button id="delete-row" class="btn btn-danger">Excluir Item</button>
+    </div>
     <script src="index.js"></script>
   </body>
 </html>
